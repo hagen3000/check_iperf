@@ -1,10 +1,6 @@
 #!/usr/bin/perl -w
 ## $Id: check_iperf.pl 232 2006-10-01 15:23:55Z touche $
-##	julien.touche@touche.fr.st
-##
-## nagios script to check speed between network links
-##
-## windows or unix, with iperf installed and an iperf service on target
+##	hagen.nicol@lan-monitor.de
 
 use strict;
 
@@ -26,7 +22,6 @@ if ($#ARGV+1 !=3) {
 	$target = $ARGV[0];
 }
 
-
 our ($mtu,$connect_ok,$speed,$unit);
 $connect_ok = 0;
 $speed = "UNKNOWN";
@@ -42,7 +37,6 @@ if ($minwarn =~ m/([0-9].+):([0-9].+)/) {
 	$minwarn = $1;
 	$maxwarn = $2;
 }
-
 
 
 open(OUT, "$iperf -c $target -m -f m|");
@@ -75,7 +69,6 @@ if ($connect_ok == 0) {
 }
 
 
-
 sub usage {
 	print <<EOL
  $0 <target host> "Critical speed" "Warning speed": 
@@ -88,9 +81,7 @@ sub usage {
 	$0 <host> 10:40 15:90
 	
 EOL
-
 }
 
 
 exit $exit;
-
